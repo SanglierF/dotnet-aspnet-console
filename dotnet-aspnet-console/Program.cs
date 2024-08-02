@@ -1,12 +1,12 @@
 ﻿namespace dotnet_aspnet_console;
 
+//Książka kucharska
 class Program
 {
     private static readonly string[] Options = ["add", "list", "remove", "help", "exit"];
 
     static int Main(string[] args)
     {
-        //Książka kucharska
         var isRunning = true;
 
         void ShowMenu()
