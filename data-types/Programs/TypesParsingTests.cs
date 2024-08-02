@@ -5,24 +5,24 @@ public static class TypesParsingTests
     public static int Run()
     {
         string? firstName = string.Empty;
-        while (firstName is null or not "")
+        while (firstName is null or "")
         {
             Console.WriteLine("Please input your first name!");
             firstName = Console.ReadLine();
-            if (firstName is not null or "")
+            if (firstName is not null or not "")
             {
-                Console.WriteLine($"Your name is {firstName}");
+                Console.WriteLine($"Your first name is {firstName}");
             }
         }
 
         string? lastName = string.Empty;
-        while (lastName is null or not "")
+        while (lastName is null or "")
         {
             Console.WriteLine("Please input your last name!");
             lastName = Console.ReadLine();
-            if (lastName is not null or "")
+            if (lastName is not null or not "")
             {
-                Console.WriteLine($"Your name is {lastName}");
+                Console.WriteLine($"Your last name is {lastName}");
             }
         }
 
@@ -31,8 +31,8 @@ public static class TypesParsingTests
         {
             Console.WriteLine("Please input your age as a whole number.");
             var input = Console.ReadLine();
-            var validInput = int.TryParse(input, out age);
-            if (!validInput)
+            var isValidInput = int.TryParse(input, out age);
+            if (!isValidInput)
             {
                 Console.WriteLine("Please input a valid integer!");
             }
@@ -51,8 +51,8 @@ public static class TypesParsingTests
         {
             Console.WriteLine("Please input your weight in kg. e.g. 65.2");
             var input = Console.ReadLine();
-            var validInput = float.TryParse(input, out weight);
-            if (!validInput)
+            var isValidInput = float.TryParse(input, out weight);
+            if (!isValidInput)
             {
                 Console.WriteLine("Please input a valid weight!");
             }
@@ -71,8 +71,8 @@ public static class TypesParsingTests
         {
             Console.WriteLine("Please input how much money you have in your wallet.");
             var input = Console.ReadLine();
-            var validInput = decimal.TryParse(input, out money);
-            if (!validInput)
+            var isValidInput = decimal.TryParse(input, out money);
+            if (!isValidInput)
             {
                 Console.WriteLine("Please input a valid amount!");
             }
@@ -91,8 +91,8 @@ public static class TypesParsingTests
         {
             Console.WriteLine("Please input how tall you are in meters. // e.g. 1.69");
             var input = Console.ReadLine();
-            var validInput = double.TryParse(input, out height);
-            if (!validInput)
+            var isValidInput = double.TryParse(input, out height);
+            if (!isValidInput)
             {
                 Console.WriteLine("Please input a valid height!");
             }
@@ -111,8 +111,8 @@ public static class TypesParsingTests
         {
             Console.WriteLine("Are you Polish? Please write either \"y\" or \"n\".");
             var input = Console.ReadLine();
-            var validInput = char.TryParse(input, out nationality);
-            if (!validInput)
+            var isValidInput = char.TryParse(input, out nationality);
+            if (!isValidInput)
             {
                 Console.WriteLine("Please answer with a single character!");
             }
