@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "data-types", "data-types\da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "conditions", "conditions\conditions.csproj", "{C7FABB88-7A6E-47E8-B9C1-C5B52BE57F36}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loops", "loops\loops.csproj", "{A31D524E-B729-4C05-AECE-6670AF321E1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{C7FABB88-7A6E-47E8-B9C1-C5B52BE57F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7FABB88-7A6E-47E8-B9C1-C5B52BE57F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7FABB88-7A6E-47E8-B9C1-C5B52BE57F36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A31D524E-B729-4C05-AECE-6670AF321E1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A31D524E-B729-4C05-AECE-6670AF321E1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A31D524E-B729-4C05-AECE-6670AF321E1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A31D524E-B729-4C05-AECE-6670AF321E1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
