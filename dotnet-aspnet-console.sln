@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-aspnet-console", "do
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "data-types", "data-types\data-types.csproj", "{BA1A13CB-DFA0-45A4-906C-98F46B21F034}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "conditions", "conditions\conditions.csproj", "{C7FABB88-7A6E-47E8-B9C1-C5B52BE57F36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{BA1A13CB-DFA0-45A4-906C-98F46B21F034}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA1A13CB-DFA0-45A4-906C-98F46B21F034}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA1A13CB-DFA0-45A4-906C-98F46B21F034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7FABB88-7A6E-47E8-B9C1-C5B52BE57F36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7FABB88-7A6E-47E8-B9C1-C5B52BE57F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7FABB88-7A6E-47E8-B9C1-C5B52BE57F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7FABB88-7A6E-47E8-B9C1-C5B52BE57F36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
