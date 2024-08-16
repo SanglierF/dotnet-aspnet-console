@@ -139,13 +139,13 @@ internal static class Program
     // Reverse string.
     private static void E8()
     {
-        String:
+        RetryInputString:
         Console.WriteLine("Please input something.");
         var input = Console.ReadLine();
         if (input is null or "")
         {
             Console.WriteLine("Please input something!");
-            goto String;
+            goto RetryInputString;
         }
 
         for (var i = input.Length - 1; i >= 0; i--)
