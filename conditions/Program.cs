@@ -197,31 +197,31 @@ internal static class Program
     {
         string? input;
 
-        FirstNumber:
+        RetryInputFirstNumber:
         Console.WriteLine("Please input first number. //Has to be an integer");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var parsed1))
         {
             Console.WriteLine("Not an integer!");
-            goto FirstNumber;
+            goto RetryInputFirstNumber;
         }
 
-        SecondNumber:
+        RetryInputSecondNumber:
         Console.WriteLine("Please input second number. //Has to be an integer");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var parsed2))
         {
             Console.WriteLine("Not an integer!");
-            goto SecondNumber;
+            goto RetryInputSecondNumber;
         }
 
-        ThirdNumber:
+        RetryInputThirdNumber:
         Console.WriteLine("Please input third number. //Has to be an integer");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var parsed3))
         {
             Console.WriteLine("Not an integer!");
-            goto ThirdNumber;
+            goto RetryInputThirdNumber;
         }
 
         if (parsed1 > parsed2 && parsed1 > parsed3)
@@ -243,31 +243,31 @@ internal static class Program
     {
         string? input;
 
-        Math:
+        RetryInputMathScore:
         Console.WriteLine("Please input Math exam score. //Has to be a non-negative integer");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var mathScore) || mathScore < 0)
         {
             Console.WriteLine("Input must be an integer and a positive number!");
-            goto Math;
+            goto RetryInputMathScore;
         }
 
-        Physics:
+        RetryInputPhysicsScore:
         Console.WriteLine("Please input Physics exam score. //Has to be a non-negative integer");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var physicsScore) || physicsScore < 0)
         {
             Console.WriteLine("Input must be an integer and a positive number!");
-            goto Physics;
+            goto RetryInputPhysicsScore;
         }
 
-        Chemistry:
+        RetryInputChemistryScore:
         Console.WriteLine("Please input Chemistry exam score. //Has to be a non-negative integer");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var chemistryScore) || chemistryScore < 0)
         {
             Console.WriteLine("Input must be an integer and a positive number!");
-            goto Chemistry;
+            goto RetryInputChemistryScore;
         }
 
         if (mathScore <= 70 || physicsScore <= 55 || chemistryScore <= 45)
@@ -291,13 +291,13 @@ internal static class Program
     {
         string? input;
 
-        Temperature:
+        RetryInputTemperature:
         Console.WriteLine("Please input current temperature. //Has to be an integer");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var temperature))
         {
             Console.WriteLine("Input must be an integer!");
-            goto Temperature;
+            goto RetryInputTemperature;
         }
 
         var message = temperature switch
@@ -318,31 +318,31 @@ internal static class Program
     {
         string? input;
 
-        SideA:
+        RetryInputSideA:
         Console.WriteLine("Please input first side of triangle. //Has to be a positive integer");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var sideA) || sideA <= 0)
         {
             Console.WriteLine("Input must be a positive integer!");
-            goto SideA;
+            goto RetryInputSideA;
         }
 
-        SideB:
+        RetryInputSideB:
         Console.WriteLine("Please input second side of triangle. //Has to be a positive integer");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var sideB) || sideB <= 0)
         {
             Console.WriteLine("Input must be a positive integer!");
-            goto SideB;
+            goto RetryInputSideB;
         }
 
-        SideC:
+        RetryInputSideC:
         Console.WriteLine("Please input third side of triangle. //Has to be a positive integer");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var sideC) || sideC <= 0)
         {
             Console.WriteLine("Input must be a positive integer!");
-            goto SideC;
+            goto RetryInputSideC;
         }
 
         if ((sideA > sideB && sideA > sideC && sideA < sideB + sideC) ||
@@ -361,13 +361,13 @@ internal static class Program
     {
         string? input;
 
-        Score:
+        RetryInputScore:
         Console.WriteLine("Please input student's score in [1-6] range. //Has to be a positive integer");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var score) || score < 1 || score > 6)
         {
             Console.WriteLine("Input must be a positive integer in [1-6] range!");
-            goto Score;
+            goto RetryInputScore;
         }
 
         var message = score switch
@@ -389,13 +389,13 @@ internal static class Program
     {
         string? input;
 
-        DayOfWeek:
+        RetryInputDayOfWeek:
         Console.WriteLine("Please input day of the week score in [1-7] range. //Has to be a positive integer");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var dayOfWeek) || dayOfWeek < 1 || dayOfWeek > 7)
         {
             Console.WriteLine("Input must be a positive integer in [1-7] range!");
-            goto DayOfWeek;
+            goto RetryInputDayOfWeek;
         }
 
         var message = dayOfWeek switch
@@ -418,25 +418,25 @@ internal static class Program
     {
         string? input;
 
-        FirstNumber:
+        RetryInputFirstNumber:
         Console.WriteLine("Please input first number.");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var firstNumber))
         {
             Console.WriteLine("Input must be an integer!");
-            goto FirstNumber;
+            goto RetryInputFirstNumber;
         }
 
-        SecondNumber:
+        RetryInputSecondNumber:
         Console.WriteLine("Please input second number.");
         input = Console.ReadLine();
         if (!int.TryParse(input, out var secondNumber))
         {
             Console.WriteLine("Input must be an integer!");
-            goto SecondNumber;
+            goto RetryInputSecondNumber;
         }
 
-        Option:
+        RetryInputOption:
         Console.WriteLine("Please input what calculation you want to do.");
         Console.WriteLine("1. Add");
         Console.WriteLine("2. Subtract");
@@ -446,7 +446,7 @@ internal static class Program
         if (!int.TryParse(input, out var option) || option < 1 || option > 4)
         {
             Console.WriteLine("Input must be an integer in range [1, 4]!");
-            goto Option;
+            goto RetryInputOption;
         }
 
         switch (option)
