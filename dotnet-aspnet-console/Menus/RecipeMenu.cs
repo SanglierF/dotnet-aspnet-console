@@ -257,7 +257,7 @@ public class RecipeMenu
             {
                 while (true)
                 {
-                    Console.WriteLine("Please input categories separated by , fe. cake,sweet");
+                    Console.WriteLine("Please input categories separated by a comma ',' fe. cake,sweet");
                     cookbook.Categories.ForEach(category => Console.Write(category + "; "));
                     var inputCategories = Console.ReadLine();
                     if (inputCategories is null or "")
