@@ -53,19 +53,13 @@ public class RecipeMenu
                     ListRecipe();
                     break;
                 case RecipeMenuOptions.Back:
-                    goto Back;
+                    return false;
                 case RecipeMenuOptions.Exit:
-                    goto Exit;
+                    return true;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-        Back:
-        return false;
-
-        Exit:
-        return true;
 
         void ShowHelp()
         {

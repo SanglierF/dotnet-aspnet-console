@@ -53,19 +53,13 @@ public class CategoryMenu
                     ShowHelp();
                     break;
                 case CategoryOptions.Back:
-                    goto Back;
+                    return false;
                 case CategoryOptions.Exit:
-                    goto Exit;
+                    return true;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-        Back:
-        return false;
-
-        Exit:
-        return true;
 
         void ShowHelp()
         {
