@@ -24,6 +24,7 @@ public class CategoryMenu
     /// <exception cref="ArgumentOutOfRangeException">Thrown on a catastrophic error.</exception>
     internal static bool Run(Cookbook cookbook)
     {
+        Console.Clear();
         ShowHelp();
         while (true)
         {

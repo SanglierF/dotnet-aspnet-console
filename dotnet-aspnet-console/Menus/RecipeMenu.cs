@@ -25,6 +25,7 @@ public class RecipeMenu
     /// <exception cref="ArgumentOutOfRangeException">Thrown on a catastrophic error.</exception>
     internal static bool Run(Cookbook cookbook)
     {
+        Console.Clear();
         ShowHelp();
         while (true)
         {
@@ -259,6 +260,7 @@ public class RecipeMenu
                 {
                     Console.WriteLine("Please input categories separated by a comma ',' fe. cake,sweet");
                     cookbook.Categories.ForEach(category => Console.Write(category + "; "));
+                    Console.WriteLine();
                     var inputCategories = Console.ReadLine();
                     if (inputCategories is null or "")
                     {

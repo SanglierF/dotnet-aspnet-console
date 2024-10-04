@@ -29,10 +29,12 @@ internal static class MainMenu
             {
                 case MainMenuOptions.Recipes:
                     if (RecipeMenu.Run(cookbook)) goto Exit;
+                    Console.Clear();
                     ShowHelp();
                     break;
                 case MainMenuOptions.Categories:
                     if (CategoryMenu.Run(cookbook)) goto Exit;
+                    Console.Clear();
                     ShowHelp();
                     break;
                 case MainMenuOptions.Help:
