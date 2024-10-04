@@ -8,6 +8,7 @@ public class RecipeMenu
     private enum RecipeMenuOptions
     {
         Create,
+        Show,
         Remove,
         Update,
         List,
@@ -40,6 +41,9 @@ public class RecipeMenu
                 case RecipeMenuOptions.Create:
                     CreateRecipe();
                     break;
+                case RecipeMenuOptions.Show:
+                    ShowRecipe();
+                    break;
                 case RecipeMenuOptions.Remove:
                     RemoveRecipe();
                     break;
@@ -64,6 +68,7 @@ public class RecipeMenu
         void ShowHelp()
         {
             Console.WriteLine($"{RecipeMenuOptions.Create.ToLowerString()} - create recipe");
+            Console.WriteLine($"{RecipeMenuOptions.Show.ToLowerString()} - show recipe");
             Console.WriteLine($"{RecipeMenuOptions.Remove.ToLowerString()} - remove recipe");
             Console.WriteLine($"{RecipeMenuOptions.Update.ToLowerString()} - update recipe");
             Console.WriteLine($"{RecipeMenuOptions.List.ToLowerString()} - show all recipes");
@@ -118,6 +123,26 @@ public class RecipeMenu
                     Categories = categories,
                 });
             Console.WriteLine("Successfully added new recipe!");
+        }
+
+        void ShowRecipe()
+        {
+            Console.WriteLine("Please input recipe name");
+            string? name;
+            while (true)
+            {
+                name = Console.ReadLine();
+                if (name is null or "")
+                {
+                    Console.WriteLine("Name can't be empty!");
+                    continue;
+                }
+
+                break;
+            }
+
+            var foundRecipe = cookbook.Recipes.SingleOrDefault(recipe => recipe.Name.Equals(name));
+            Console.WriteLine(foundRecipe == null ? "No recipe with given name!" : foundRecipe);
         }
 
         void RemoveRecipe()
