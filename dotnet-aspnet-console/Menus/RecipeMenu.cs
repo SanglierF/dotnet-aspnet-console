@@ -246,7 +246,7 @@ public class RecipeMenu
                 return;
             }
 
-            cookbook.Recipes.ForEach(recipe => Console.WriteLine(recipe.ToString()));
+            cookbook.Recipes.ForEach(recipe => Console.WriteLine(recipe.Name));
         }
 
         List<Category> AssignCategories()
