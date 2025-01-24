@@ -1,5 +1,5 @@
-using dotnet_aspnet_console.Models;
 using dotnet_aspnet_core.IRepositories;
+using dotnet_aspnet_core.Models;
 using dotnet_aspnet_infrastructure_memory.Data;
 
 namespace dotnet_aspnet_infrastructure_memory.Repositories;

@@ -1,4 +1,5 @@
 using dotnet_aspnet_console.Extensions;
+using dotnet_aspnet_core.Models;
 
 namespace dotnet_aspnet_console.Menus;
 

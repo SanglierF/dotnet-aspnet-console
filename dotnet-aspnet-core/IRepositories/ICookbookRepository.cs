@@ -1,4 +1,4 @@
-using dotnet_aspnet_console;
+using dotnet_aspnet_core.Models;
 
 namespace dotnet_aspnet_core.IRepositories;
 

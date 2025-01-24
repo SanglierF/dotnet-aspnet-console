@@ -1,4 +1,4 @@
-namespace dotnet_aspnet_console.Models;
+namespace dotnet_aspnet_core.Models;
 
 public class Recipe : ICloneable
 {

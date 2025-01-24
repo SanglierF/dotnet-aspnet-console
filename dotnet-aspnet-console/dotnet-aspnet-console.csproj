@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\dotnet-aspnet-core\dotnet-aspnet-core.csproj" />
+      <ProjectReference Include="..\dotnet-aspnet-infrastructure-memory\dotnet-aspnet-infrastructure-memory.csproj" />
     </ItemGroup>
 
     <ItemGroup>
