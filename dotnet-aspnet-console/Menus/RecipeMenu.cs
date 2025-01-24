@@ -133,7 +133,7 @@ public class RecipeMenu
             while (true)
             {
                 name = Console.ReadLine();
-                if (name is null or "")
+                if (name.IsNullOrEmpty())
                 {
                     Console.WriteLine("Name can't be empty!");
                     continue;

@@ -8,6 +8,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "conditions", "conditions\co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loops", "loops\loops.csproj", "{A31D524E-B729-4C05-AECE-6670AF321E1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-aspnet-core", "dotnet-aspnet-core\dotnet-aspnet-core.csproj", "{40CBF873-C724-4BD5-9537-14BCF0694FE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-aspnet-infrastructure-sqlite", "dotnet-aspnet-infrastructure-sqlite\dotnet-aspnet-infrastructure-sqlite.csproj", "{C6D88AD1-00A3-49BF-88F4-D40E1175DF99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-aspnet-infrastructure-memory", "dotnet-aspnet-infrastructure-memory\dotnet-aspnet-infrastructure-memory.csproj", "{1762291A-ADD7-4948-A5FB-4419F2ABA25F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +36,17 @@ Global
 		{A31D524E-B729-4C05-AECE-6670AF321E1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A31D524E-B729-4C05-AECE-6670AF321E1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A31D524E-B729-4C05-AECE-6670AF321E1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40CBF873-C724-4BD5-9537-14BCF0694FE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40CBF873-C724-4BD5-9537-14BCF0694FE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40CBF873-C724-4BD5-9537-14BCF0694FE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40CBF873-C724-4BD5-9537-14BCF0694FE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6D88AD1-00A3-49BF-88F4-D40E1175DF99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6D88AD1-00A3-49BF-88F4-D40E1175DF99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6D88AD1-00A3-49BF-88F4-D40E1175DF99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6D88AD1-00A3-49BF-88F4-D40E1175DF99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1762291A-ADD7-4948-A5FB-4419F2ABA25F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1762291A-ADD7-4948-A5FB-4419F2ABA25F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1762291A-ADD7-4948-A5FB-4419F2ABA25F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1762291A-ADD7-4948-A5FB-4419F2ABA25F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

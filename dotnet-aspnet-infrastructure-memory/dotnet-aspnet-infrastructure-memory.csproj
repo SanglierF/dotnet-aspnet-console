@@ -1,20 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
-        <RootNamespace>dotnet_aspnet_console</RootNamespace>
+        <RootNamespace>dotnet_aspnet_infrastructure_memory</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\dotnet-aspnet-core\dotnet-aspnet-core.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="IServices\" />
-      <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>
