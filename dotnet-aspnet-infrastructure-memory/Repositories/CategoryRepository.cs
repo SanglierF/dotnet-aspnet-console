@@ -8,7 +8,7 @@ public class CategoryRepository : ICategoryRepository
 {
     private readonly MContext _mContext;
 
-    CategoryRepository(MContext mContext)
+    public CategoryRepository(MContext mContext)
     {
         _mContext = mContext;
     }

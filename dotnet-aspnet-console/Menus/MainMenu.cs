@@ -1,9 +1,13 @@
 using dotnet_aspnet_console.Extensions;
+using dotnet_aspnet_console.Services;
 using dotnet_aspnet_core.Models;
 
 namespace dotnet_aspnet_console.Menus;
 
-internal static class MainMenu
+internal class MainMenu(
+    CookbookService cookbookService,
+    CategoryService categoryService,
+    RecipeService recipeService)
 {
     private enum MainMenuOptions
     {
@@ -13,8 +17,15 @@ internal static class MainMenu
         Exit,
     }
 
-    internal static void Run(Cookbook cookbook)
+    /// <summary>
+    /// Runs main options menu in a loop.
+    /// </summary>
+    /// <returns><see cref="bool"/> value whether program should exit completely.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown on a catastrophic error.</exception>
+    internal async Task<bool> RunAsync()
     {
+        var recipeMenu = new RecipeMenu(cookbookService, categoryService, recipeService);
+        var categoryMenu = new CategoryMenu(cookbookService, categoryService, recipeService);
         ShowHelp();
         while (true)
         {
@@ -29,12 +40,12 @@ internal static class MainMenu
             switch (inputEnum)
             {
                 case MainMenuOptions.Recipes:
-                    if (RecipeMenu.Run(cookbook)) goto Exit;
+                    if (await recipeMenu.RunAsync()) goto Exit;
                     Console.Clear();
                     ShowHelp();
                     break;
                 case MainMenuOptions.Categories:
-                    if (CategoryMenu.Run(cookbook)) goto Exit;
+                    if (await categoryMenu.RunAsync()) goto Exit;
                     Console.Clear();
                     ShowHelp();
                     break;
@@ -50,7 +61,7 @@ internal static class MainMenu
 
         Exit:
         Console.WriteLine("bye bye!");
-        return;
+        return true;
 
         void ShowHelp()
         {

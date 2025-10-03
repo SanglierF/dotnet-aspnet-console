@@ -8,7 +8,7 @@ public class RecipeRepository : IRecipeRepository
 {
     private readonly MContext _mContext;
 
-    RecipeRepository(MContext mContext)
+    public RecipeRepository(MContext mContext)
     {
         _mContext = mContext;
     }

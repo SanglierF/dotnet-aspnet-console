@@ -8,7 +8,7 @@ public class CookbookRepository : ICookbookRepository
 {
     private readonly MContext _mContext;
 
-    CookbookRepository(MContext mContext)
+    public CookbookRepository(MContext mContext)
     {
         _mContext = mContext;
     }

@@ -27,6 +27,12 @@ riderModule.iml
 **/.idea/**/contentModel.xml
 **/.idea/**/modules.xml
 
+# Rider copilot
+/.idea/.idea.dotnet-aspnet-console/.idea/copilot.data.migration.agent.xml
+/.idea/.idea.dotnet-aspnet-console/.idea/copilot.data.migration.ask.xml
+/.idea/.idea.dotnet-aspnet-console/.idea/copilot.data.migration.ask2agent.xml
+/.idea/.idea.dotnet-aspnet-console/.idea/copilot.data.migration.edit.xml
+
 *.suo
 *.user
 .vs/

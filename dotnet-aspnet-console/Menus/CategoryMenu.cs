@@ -1,9 +1,14 @@
+using dotnet_aspnet_console.Exceptions;
 using dotnet_aspnet_console.Extensions;
+using dotnet_aspnet_console.Services;
 using dotnet_aspnet_core.Models;
 
 namespace dotnet_aspnet_console.Menus;
 
-public class CategoryMenu
+public class CategoryMenu(
+    CookbookService cookbookService,
+    CategoryService categoryService,
+    RecipeService recipeService)
 {
     private enum CategoryOptions
     {
@@ -19,10 +24,9 @@ public class CategoryMenu
     /// <summary>
     /// Runs category options menu in a loop.
     /// </summary>
-    /// <param name="cookbook">Used <see cref="Cookbook"/>.</param>
     /// <returns><see cref="bool"/> value whether program should exit completely.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Thrown on a catastrophic error.</exception>
-    internal static bool Run(Cookbook cookbook)
+    internal async Task<bool> RunAsync()
     {
         Console.Clear();
         ShowHelp();
@@ -39,16 +43,16 @@ public class CategoryMenu
             switch (inputEnum)
             {
                 case CategoryOptions.Add:
-                    AddCategory();
+                    await AddCategory();
                     break;
                 case CategoryOptions.Delete:
-                    DeleteCategory();
+                    await DeleteCategory();
                     break;
                 case CategoryOptions.Edit:
-                    EditCategory();
+                    await EditCategory();
                     break;
                 case CategoryOptions.List:
-                    ListCategories();
+                    await ListCategories();
                     break;
                 case CategoryOptions.Help:
                     ShowHelp();
@@ -74,7 +78,7 @@ public class CategoryMenu
         }
 
 
-        void AddCategory()
+        async Task AddCategory()
         {
             Console.WriteLine("Please input category name");
             string? name;
@@ -87,24 +91,27 @@ public class CategoryMenu
                     continue;
                 }
 
-                if (cookbook.Categories.Any(category => category.Name.Equals(name)))
+                try
                 {
-                    Console.WriteLine("category with a given name already exists!");
+                    await categoryService.CreateAsync(
+                        new Category
+                        {
+                            Name = name,
+                        });
+                }
+                catch (ValidationException validationException)
+                {
+                    Console.WriteLine(validationException.Message);
                     return;
                 }
 
                 break;
             }
 
-            cookbook.Categories.Add(
-                new Category
-                {
-                    Name = name,
-                });
             Console.WriteLine("Successfully added new category!");
         }
 
-        void DeleteCategory()
+        async Task DeleteCategory()
         {
             Console.WriteLine("Please input category name");
             string? name;
@@ -120,7 +127,7 @@ public class CategoryMenu
                 break;
             }
 
-            var foundCategory = cookbook.Categories.SingleOrDefault(category => category.Name.Equals(name));
+            var foundCategory = await categoryService.FindByName(name);
 
             if (foundCategory is null)
             {
@@ -128,12 +135,11 @@ public class CategoryMenu
                 return;
             }
 
-            cookbook.Recipes.ForEach(recipe => recipe.Categories.Remove(foundCategory));
-            cookbook.Categories.Remove(foundCategory);
+            await categoryService.RemoveAsync(foundCategory);
             Console.WriteLine("Removed category!");
         }
 
-        void EditCategory()
+        async Task EditCategory()
         {
             Console.WriteLine("Please input category name");
             string? name;
@@ -149,9 +155,10 @@ public class CategoryMenu
                 break;
             }
 
-            var foundcategory = cookbook.Categories.SingleOrDefault(category => category.Name.Equals(name));
+            var foundCategory =
+                (await categoryService.BrowseAsync()).SingleOrDefault(category => category.Name.Equals(name));
 
-            if (foundcategory is null)
+            if (foundCategory is null)
             {
                 Console.WriteLine("No category with given name!");
                 return;
@@ -168,28 +175,30 @@ public class CategoryMenu
                     continue;
                 }
 
-                if (cookbook.Categories.Any(category => category.Name.Equals(newName)))
+                if (await categoryService.FindByName(newName) is not null)
                 {
-                    Console.WriteLine("category with a given name already exists!");
+                    Console.WriteLine("Category with a given name already exists!");
                     return;
                 }
 
                 break;
             }
 
-            foundcategory.Name = newName;
+            foundCategory.Name = newName;
+            await categoryService.UpdateAsync(foundCategory);
             Console.WriteLine("Successfully edited category!");
         }
 
-        void ListCategories()
+        async Task ListCategories()
         {
-            if (cookbook.Categories.Count == 0)
+            var categories = (await categoryService.BrowseAsync()).ToList();
+            if (categories.Count == 0)
             {
                 Console.WriteLine("No categories!");
                 return;
             }
 
-            cookbook.Categories.ForEach(category => Console.WriteLine(category.ToString()));
+            categories.ForEach(category => Console.WriteLine(category.ToString()));
         }
     }
 }

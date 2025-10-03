@@ -1,9 +1,15 @@
 using dotnet_aspnet_console.Extensions;
+using dotnet_aspnet_console.Services;
 using dotnet_aspnet_core.Models;
 
 namespace dotnet_aspnet_console.Menus;
 
-public class RecipeMenu
+using dotnet_aspnet_console.Exceptions;
+
+public class RecipeMenu(
+    CookbookService cookbookService,
+    CategoryService categoryService,
+    RecipeService recipeService)
 {
     private enum RecipeMenuOptions
     {
@@ -20,10 +26,9 @@ public class RecipeMenu
     /// <summary>
     /// Runs recipe options menu in a loop.
     /// </summary>
-    /// <param name="cookbook">Used <see cref="Cookbook"/>.</param>
     /// <returns><see cref="bool"/> value whether program should exit completely.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Thrown on a catastrophic error.</exception>
-    internal static bool Run(Cookbook cookbook)
+    internal async Task<bool> RunAsync()
     {
         Console.Clear();
         ShowHelp();
@@ -40,22 +45,22 @@ public class RecipeMenu
             switch (inputEnum)
             {
                 case RecipeMenuOptions.Create:
-                    CreateRecipe();
+                    await CreateRecipe();
                     break;
                 case RecipeMenuOptions.Show:
-                    ShowRecipe();
+                    await ShowRecipe();
                     break;
                 case RecipeMenuOptions.Remove:
-                    RemoveRecipe();
+                    await RemoveRecipe();
                     break;
                 case RecipeMenuOptions.Update:
-                    UpdateRecipe();
+                    await UpdateRecipe();
                     break;
                 case RecipeMenuOptions.Help:
                     ShowHelp();
                     break;
                 case RecipeMenuOptions.List:
-                    ListRecipe();
+                    await ListRecipe();
                     break;
                 case RecipeMenuOptions.Back:
                     return false;
@@ -78,7 +83,7 @@ public class RecipeMenu
             Console.WriteLine($"{RecipeMenuOptions.Exit.ToLowerString()} - exit program");
         }
 
-        void CreateRecipe()
+        async Task CreateRecipe()
         {
             Console.WriteLine("Please input recipe name");
             string? name;
@@ -91,7 +96,7 @@ public class RecipeMenu
                     continue;
                 }
 
-                if (cookbook.Recipes.Any(recipe => recipe.Name.Equals(name)))
+                if ((await recipeService.BrowseAsync()).Any(recipe => recipe.Name.Equals(name)))
                 {
                     Console.WriteLine("Recipe with a given name already exists!");
                     return;
@@ -114,26 +119,36 @@ public class RecipeMenu
                 break;
             }
 
-            var categories = AssignCategories();
+            var categories = await AssignCategories();
 
-            cookbook.Recipes.Add(
-                new Recipe
-                {
-                    Name = name,
-                    Instructions = instructions,
-                    Categories = categories,
-                });
+            try
+            {
+                await recipeService.CreateAsync(
+                    new Recipe
+                    {
+                        Name = name,
+                        Instructions = instructions,
+                        Categories = categories,
+                    });
+            }
+            catch (ValidationException validationException)
+            {
+                Console.WriteLine(validationException.Message);
+                return;
+            }
+
+
             Console.WriteLine("Successfully added new recipe!");
         }
 
-        void ShowRecipe()
+        async Task ShowRecipe()
         {
             Console.WriteLine("Please input recipe name");
             string? name;
             while (true)
             {
                 name = Console.ReadLine();
-                if (name.IsNullOrEmpty())
+                if (string.IsNullOrWhiteSpace(name))
                 {
                     Console.WriteLine("Name can't be empty!");
                     continue;
@@ -142,11 +157,14 @@ public class RecipeMenu
                 break;
             }
 
-            var foundRecipe = cookbook.Recipes.SingleOrDefault(recipe => recipe.Name.Equals(name));
-            Console.WriteLine(foundRecipe == null ? "No recipe with given name!" : foundRecipe);
+            var foundRecipe = await recipeService.FindByName(name);
+            Console.WriteLine(
+                foundRecipe == null ?
+                    "No recipe with given name!" :
+                    foundRecipe);
         }
 
-        void RemoveRecipe()
+        async Task RemoveRecipe()
         {
             Console.WriteLine("Please input recipe name");
             string? name;
@@ -162,7 +180,7 @@ public class RecipeMenu
                 break;
             }
 
-            var foundRecipe = cookbook.Recipes.SingleOrDefault(recipe => recipe.Name.Equals(name));
+            var foundRecipe = await recipeService.FindByName(name);
 
             if (foundRecipe is null)
             {
@@ -170,11 +188,11 @@ public class RecipeMenu
                 return;
             }
 
-            cookbook.Recipes.Remove(foundRecipe);
+            await recipeService.RemoveAsync(foundRecipe);
             Console.WriteLine("Removed recipe!");
         }
 
-        void UpdateRecipe()
+        async Task UpdateRecipe()
         {
             Console.WriteLine("Please input recipe name");
             string? name;
@@ -190,7 +208,7 @@ public class RecipeMenu
                 break;
             }
 
-            var foundRecipe = cookbook.Recipes.SingleOrDefault(recipe => recipe.Name.Equals(name));
+            var foundRecipe = await recipeService.FindByName(name);
 
             if (foundRecipe is null)
             {
@@ -209,7 +227,7 @@ public class RecipeMenu
                     break;
                 }
 
-                if (cookbook.Recipes.Any(recipe => recipe.Name.Equals(newName)))
+                if (await recipeService.FindByName(newName) is not null)
                 {
                     Console.WriteLine("Recipe with a given name already exists!");
                     return;
@@ -231,35 +249,38 @@ public class RecipeMenu
                 break;
             }
 
-            var categories = AssignCategories();
+            var categories = await AssignCategories();
 
             foundRecipe.Name = newName;
             foundRecipe.Instructions = instructions;
             foundRecipe.Categories = categories;
+            await recipeService.UpdateAsync(foundRecipe);
             Console.WriteLine("Updated recipe!");
         }
 
-        void ListRecipe()
+        async Task ListRecipe()
         {
-            if (cookbook.Recipes.Count == 0)
+            var recipes = (await recipeService.BrowseAsync()).ToList();
+            if (recipes.Count == 0)
             {
                 Console.WriteLine("No recipes!");
                 return;
             }
 
-            cookbook.Recipes.ForEach(recipe => Console.WriteLine(recipe.Name));
+            recipes.ForEach(recipe => Console.WriteLine(recipe.Name));
         }
 
-        List<Category> AssignCategories()
+        async Task<List<Category>> AssignCategories()
         {
             List<Category> categories = new List<Category>();
             Console.WriteLine("To which categories should this recipe belong?");
-            if (cookbook.Categories.Count != 0)
+            var allCategories = (await categoryService.BrowseAsync()).ToList();
+            if (allCategories.Count != 0)
             {
                 while (true)
                 {
                     Console.WriteLine("Please input categories separated by a comma ',' fe. cake,sweet");
-                    cookbook.Categories.ForEach(category => Console.Write(category + "; "));
+                    allCategories.ForEach(category => Console.Write(category + "; "));
                     Console.WriteLine();
                     var inputCategories = Console.ReadLine();
                     if (inputCategories is null or "")
@@ -272,7 +293,7 @@ public class RecipeMenu
                     foreach (var categoryString in categoriesStrings)
                     {
                         var foundCategory =
-                            cookbook.Categories.SingleOrDefault(category => category.Name.Equals(categoryString));
+                            allCategories.SingleOrDefault(category => category.Name.Equals(categoryString));
                         if (foundCategory is not null)
                         {
                             categories.Add(foundCategory);
